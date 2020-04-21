@@ -1,5 +1,4 @@
 import React from "react"
-import Animal from "./animal/Animal"
 import "./animal/Animals.css"
 import "./location/Location.css"
 import "./employee/Employee.css"
@@ -35,9 +34,9 @@ export default () => (
         <h2>Employees</h2>
         <article className="employees">
             <EmployeeProvider>
-            <LocationProvider>
-                 <EmployeeList />
-            </LocationProvider>
+                 <LocationProvider>
+                     <EmployeeList />
+                </LocationProvider>
             </EmployeeProvider>
         </article>
         <h2>Locations</h2>

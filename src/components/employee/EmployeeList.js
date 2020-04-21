@@ -12,8 +12,10 @@ export default () => {
         <div className="employees">
         {
             employees.map(emp => {
-                const location = locations.find(loc => loc.id === emp.locationId)
-             return <Employee key={emp.id} employee={emp} location= {location}/> })
+                const clinic = locations.find(loc => loc.id === emp.locationId)
+             return <Employee key={emp.id} 
+                              employee={emp} 
+                              location= {clinic}/> })
         }
         </div>
     )
