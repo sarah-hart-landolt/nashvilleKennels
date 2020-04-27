@@ -7,7 +7,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap"
 import EmployeeForm from "./EmployeeForm"
 
 
-export default () => {
+export const EmployeeList = () => {
     const { employees } = useContext(EmployeeContext)
     const { locations } = useContext(LocationContext)
 
