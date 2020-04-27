@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import { AnimalContext } from "./AnimalProvider"
-import "./Animal.css"
+import "./Animals.css"
 
 export default () => {
     const search = useRef()

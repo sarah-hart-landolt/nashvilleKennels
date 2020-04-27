@@ -7,7 +7,7 @@ import { LocationContext } from "../location/LocationProvider"
 import { CustomerContext } from "../customer/CustomerProvider"
 import AnimalForm from "./AnimalForm"
 
-export default () => {
+export default (props) => {
     const { animals, searchTerm, setAnimals } = useContext(AnimalContext)
     const [ filteredAnimals, setFiltered ] = useState([])
     const { locations } = useContext (LocationContext)
@@ -15,7 +15,7 @@ export default () => {
 
     const [modal, setModal] = useState(false)
     const toggle = () => setModal(!modal)
-
+    
     useEffect(() => {
         const subset = animals.filter(animal => animal.name.toLowerCase().includes(searchTerm))
         setFiltered(subset)
@@ -24,8 +24,7 @@ export default () => {
     useEffect(() => {
         setFiltered(animals)
     }, [animals])
-
-
+    
     return (
         <>
         <h2>Animals</h2>
@@ -63,3 +62,4 @@ export default () => {
     )
     
 }
+
