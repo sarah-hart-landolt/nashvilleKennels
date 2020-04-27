@@ -6,9 +6,6 @@ import "./Employee.css"
 export const EditEmployeeForm = ({ employee, toggle }) => {
     const { updateEmployee } = useContext(EmployeeContext)
     const { locations } = useContext(LocationContext)
-    // const employeeName = useRef("")
-    // const employeeLocation = useRef(0)
-    // const address = useRef()
 
 
     //  Separate state variable to track the employee as it is edited
@@ -49,7 +46,6 @@ export const EditEmployeeForm = ({ employee, toggle }) => {
                     <input
                         type="text"
                         id="employeeName"
-                        // ref={employeeName}
                         defaultValue={employee.name}
                         onChange={handleControlledInputChange}
                         required
@@ -65,7 +61,6 @@ export const EditEmployeeForm = ({ employee, toggle }) => {
                     <input
                         type="text"
                         id="employeeAddress"
-                        // ref={address}
                         defaultValue={employee.address}
                         onChange={handleControlledInputChange}
                         required
@@ -81,7 +76,6 @@ export const EditEmployeeForm = ({ employee, toggle }) => {
                     <select
                         defaultValue=""
                         name="location"
-                        // ref={employeeLocation}
                         defaultValue={employee.locationId}
                         onChange={handleControlledInputChange}
                         id="employeeLocation"
