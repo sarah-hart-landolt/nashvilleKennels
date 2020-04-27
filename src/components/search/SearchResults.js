@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from "react"
 import { AnimalContext } from "../animal/AnimalProvider"
 import { Animal } from "../animal/Animal"
+import { EditAnimalForm } from "../animal/EditAnimalForm"
 import { CustomerContext } from "../customer/CustomerProvider"
 import { LocationContext } from "../location/LocationProvider"
-import { Modal, ModalHeader, ModalBody } from "reactstrap"
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap"
 
 
 export const SearchResults = ({ searchTerms }) => {
-    const { animals } = useContext(AnimalContext)
+    const { animals, releaseAnimal } = useContext(AnimalContext)
     const { customers } = useContext(CustomerContext)
     const { locations } = useContext(LocationContext)
 
@@ -16,6 +17,9 @@ export const SearchResults = ({ searchTerms }) => {
 
     const [modal, setModal] = useState(false)
     const toggle = () => setModal(!modal)
+
+    const [editModal, setEditModal] = useState(false)
+    const toggleEdit = () => setEditModal(!editModal)
 
     useEffect(() => {
         if (searchTerms !== "") {
@@ -52,6 +56,34 @@ export const SearchResults = ({ searchTerms }) => {
                     <Animal key={selectedAnimal.animal.id} {...selectedAnimal} />
                 </ModalBody>
             </Modal>
+            <Modal isOpen={editModal} toggle={toggleEdit}>
+                <ModalHeader toggle={toggleEdit}>
+                    {selectedAnimal.animal.name}
+                </ModalHeader>
+                <ModalBody>
+                    <EditAnimalForm key={selectedAnimal.animal.id} toggleEdit={toggleEdit} {...selectedAnimal} />
+                </ModalBody>
+            </Modal>
+
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>
+                     { selectedAnimal.animal.name }
+                </ModalHeader>
+                <ModalBody>
+                    <Animal key={selectedAnimal.animal.id} {...selectedAnimal} />
+                </ModalBody>
+                <ModalFooter>
+                     <Button color="info" onClick={() => {
+                            toggle()
+                            toggleEdit()
+                    }}>Edit Info</Button>
+                    <Button color="danger" onClick={() => {
+                        releaseAnimal(selectedAnimal.animal.id)
+                        toggle()
+                    }}>Delete</Button>
+                </ModalFooter>
+            </Modal>
+
         </div>
     )
 }
