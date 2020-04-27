@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import { Button, Modal, ModalBody, ModalHeader} from "reactstrap"
 import { AnimalContext } from "./AnimalProvider"
-import Animal from "./Animal"
+import { Animal } from "./Animal"
 import "./Animals.css"
 import { LocationContext } from "../location/LocationProvider"
 import { CustomerContext } from "../customer/CustomerProvider"
@@ -24,7 +24,7 @@ export default (props) => {
     useEffect(() => {
         setFiltered(animals)
     }, [animals])
-    
+
     return (
         <>
         <h2>Animals</h2>
