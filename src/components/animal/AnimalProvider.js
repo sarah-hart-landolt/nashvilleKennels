@@ -13,11 +13,27 @@ export const AnimalProvider = (props) => {
     const [animals, setAnimals] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
     
-
+const releaseAnimal = animalId => {
+        return fetch(`http://localhost:8088/animals/${animalId}`, {
+            method: "DELETE"
+        })
+            .then(getAnimals)
+    }
 const getAnimals = () => {
     return fetch("http://localhost:8088/animals")
             .then(res => res.json())
             .then(setAnimals)
+    }
+
+const updateAnimal = animal => {
+        return fetch(`http://localhost:8088/animals/${animal.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(animal)
+        })
+            .then(getAnimals)
     }
 
 const addAnimal = animal => {
@@ -46,8 +62,7 @@ const addAnimal = animal => {
     return (
         <AnimalContext.Provider value={
             {
-                animals, addAnimal, setSearchTerm, searchTerm,
-                setAnimals
+                animals, addAnimal, releaseAnimal, updateAnimal
             }
         }>
             {props.children}

@@ -1,62 +1,58 @@
 import React, { useContext, useRef } from "react"
-import { AnimalContext } from "./AnimalProvider"
 import { LocationContext } from "../location/LocationProvider"
-import "./Animals.css"
+import { AnimalContext } from "./AnimalProvider"
 
 export default props => {
-    const { addAnimal } = useContext(AnimalContext)
     const { locations } = useContext(LocationContext)
-    const animalName = useRef("")
-    const animalLocation = useRef(0)
-    const animalBreed = useRef()
+    const { addAnimal } = useContext(AnimalContext)
+
+    const name = useRef()
+    const location = useRef()
+    const breed = useRef()
 
     const constructNewAnimal = () => {
-        const locationId = parseInt(animalLocation.current.value)
+        const locationId = parseInt(location.current.value)
         const userId = parseInt(localStorage.getItem("kennel_customer"))
-    
-
-        if (locationId === 0 || animalName.current.value === "" || animalBreed.current.value === "") {
-            window.alert("Please fill out all fields")
-
-        } else {
-            addAnimal({
-                name: animalName.current.value,
-                locationId: locationId,
-                breed: animalBreed.current.value,
-                customerId: userId
-            })
-            .then(props.toggler)
+        // create a new animal object
+        // Make sure that the animal object has the customerId and locationId foreign keys on it.
+        const newAnimalObj = {
+            name: name.current.value,
+            breed: breed.current.value,
+            locationId: locationId,
+            customerId: userId
         }
+        console.log(newAnimalObj)
+        // and save it to the API.
+        addAnimal(newAnimalObj).then(props.toggler)
     }
 
     return (
         <form className="animalForm">
-            <h2 className="animalForm__title">Make Appointment</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="animalName">Animal's name: </label>
+                    <label htmlFor="animalName">Name of Animal: </label>
                     <input
                         type="text"
                         id="animalName"
-                        ref={animalName}
+                        ref={name}
                         required
                         autoFocus
                         className="form-control"
-                        placeholder="Animal name"
+                        placeholder="animal name"
                     />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="animalBreed"> Breed: </label>
+                    <label htmlFor="animalBreed">Breed of Animal: </label>
                     <input
                         type="text"
                         id="animalBreed"
-                        ref={animalBreed}
+                        ref={breed}
                         required
                         autoFocus
                         className="form-control"
-                        placeholder="Animal Breed"
+                        placeholder="animal breed"
                     />
                 </div>
             </fieldset>
@@ -66,7 +62,7 @@ export default props => {
                     <select
                         defaultValue=""
                         name="location"
-                        ref={animalLocation}
+                        ref={location}
                         id="animalLocation"
                         className="form-control"
                     >
@@ -83,11 +79,12 @@ export default props => {
                 onClick={
                     evt => {
                         evt.preventDefault() // Prevent browser from submitting the form
+                        // create the animal function goes here
                         constructNewAnimal()
                     }
                 }
                 className="btn btn-primary">
-                Save Appointment
+                Admit Animal
             </button>
         </form>
     )
