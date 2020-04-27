@@ -3,7 +3,7 @@ import { CustomerContext } from "./CustomerProvider"
 import Customer from "./Customer"
 import "./Customer.css"
 
-export default () => {
+export const CustomerList = () => {
     const { customers } = useContext(CustomerContext)
 
     return (
