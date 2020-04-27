@@ -7,10 +7,14 @@ export default () => {
     const { customers } = useContext(CustomerContext)
 
     return (
+      <>
+        <h2>Customers</h2>
+
         <div className="customers">
         {
-            customers.map(loc => <Customer key={loc.id} customer={loc} />)
+            customers.map(cus => <Customer key={cus.id} customer={cus} />)
         }
         </div>
+    </>
     )
 }
