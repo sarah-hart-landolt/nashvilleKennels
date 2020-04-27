@@ -7,10 +7,14 @@ export default () => {
     const { locations } = useContext(LocationContext)
 
     return (
+     <>
+        <h2>Locations</h2>
+        
         <div className="locations">
         {
             locations.map(loc => <Location key={loc.id} location={loc} />)
         }
         </div>
+     </>
     )
 }

@@ -8,17 +8,22 @@ export default props => {
     const { locations } = useContext(LocationContext)
     const animalName = useRef("")
     const animalLocation = useRef(0)
-    const address = useRef()
+    const animalBreed = useRef()
 
     const constructNewAnimal = () => {
         const locationId = parseInt(animalLocation.current.value)
+        const userId = parseInt(localStorage.getItem("kennel_customer"))
+    
 
-        if (locationId === 0) {
-            window.alert("Please select a location")
+        if (locationId === 0 || animalName.current.value === "" || animalBreed.current.value === "") {
+            window.alert("Please fill out all fields")
+
         } else {
             addAnimal({
                 name: animalName.current.value,
                 locationId: locationId,
+                breed: animalBreed.current.value,
+                customerId: userId
             })
             .then(props.toggler)
         }
@@ -29,7 +34,7 @@ export default props => {
             <h2 className="animalForm__title">Make Appointment</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="animalName">Animal name: </label>
+                    <label htmlFor="animalName">Animal's name: </label>
                     <input
                         type="text"
                         id="animalName"
@@ -38,6 +43,20 @@ export default props => {
                         autoFocus
                         className="form-control"
                         placeholder="Animal name"
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="animalBreed"> Breed: </label>
+                    <input
+                        type="text"
+                        id="animalBreed"
+                        ref={animalBreed}
+                        required
+                        autoFocus
+                        className="form-control"
+                        placeholder="Animal Breed"
                     />
                 </div>
             </fieldset>
@@ -64,11 +83,11 @@ export default props => {
                 onClick={
                     evt => {
                         evt.preventDefault() // Prevent browser from submitting the form
-                        constructNewEmployee()
+                        constructNewAnimal()
                     }
                 }
                 className="btn btn-primary">
-                Save Employee
+                Save Appointment
             </button>
         </form>
     )

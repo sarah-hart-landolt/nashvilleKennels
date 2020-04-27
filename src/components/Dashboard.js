@@ -11,6 +11,7 @@ import EmployeeList from "./employee/EmployeeList"
 import { EmployeeProvider} from "./employee/EmployeeProvider"
 import AnimalList from "./animal/AnimalList"
 import { AnimalProvider} from "./animal/AnimalProvider"
+import AnimalSearch from "./animal/AnimalSearch"
 
 export default () => (
     <>
@@ -21,17 +22,22 @@ export default () => (
             <div>Visit Us at the Nashville North Location</div>
             <div>500 Puppy Way</div>
         </address>
-        <h2>Animals</h2>
-        <article className="animals">
+        <article>
             <AnimalProvider>
-                <LocationProvider>
-                    <CustomerProvider>
-                        <AnimalList />
-                    </CustomerProvider>
-                </LocationProvider>
+                <CustomerProvider>
+                    <EmployeeProvider>
+                        <LocationProvider>
+                            <LocationList />
+                            <AnimalList />
+                            <AnimalSearch />
+                            <CustomerList />
+                            <EmployeeList />
+                        </LocationProvider>
+                    </EmployeeProvider>
+                </CustomerProvider>
             </AnimalProvider>
         </article>
-        <h2>Employees</h2>
+        {/* <h2>Employees</h2>
         <article className="employees">
              <EmployeeProvider>
                 <LocationProvider>
@@ -50,6 +56,6 @@ export default () => (
             <CustomerProvider>
                 <CustomerList />
             </CustomerProvider>
-        </article>
+        </article> */}
     </>
 )

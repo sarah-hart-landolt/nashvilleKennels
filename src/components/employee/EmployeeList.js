@@ -16,8 +16,8 @@ export default () => {
 
     return (
         <>
-
-            <div className="fakeLink href" onClick={toggle}>New Employee</div>
+            <h2>Employees</h2>
+            <Button onClick={toggle}>New Employee</Button>
 
             <ul className="employees">
         {

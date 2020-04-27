@@ -11,15 +11,17 @@ export const AnimalContext = React.createContext()
  */
 export const AnimalProvider = (props) => {
     const [animals, setAnimals] = useState([])
+    const [searchTerm, setSearchTerm] = useState("")
+}
 
-    const getAnimals = () => {
-        return fetch("http://localhost:8088/animals")
+const getAnimals = () => {
+    return fetch("http://localhost:8088/animals")
             .then(res => res.json())
             .then(setAnimals)
     }
 
-    const addAnimal = animal => {
-        return fetch("http://localhost:8088/animals", {
+const addAnimal = animal => {
+    return fetch("http://localhost:8088/animals", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -42,10 +44,13 @@ export const AnimalProvider = (props) => {
     }, [animals])
 
     return (
-        <AnimalContext.Provider value={{
-            animals, addAnimal
-        }}>
+        <AnimalContext.Provider value={
+            {
+                animals, addAnimal, releaseAnimal,
+                updateAnimal, setSearchTerm, searchTerm,
+                setAnimals
+            }
+        }>
             {props.children}
         </AnimalContext.Provider>
     )
-}
