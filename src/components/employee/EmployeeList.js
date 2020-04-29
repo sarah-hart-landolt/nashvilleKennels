@@ -22,7 +22,7 @@ export const EmployeeList = () => {
             <ul className="employees">
         {
             employees.map(emp => {
-                const clinic = locations.find(loc => loc.id === emp.locationId)
+                const clinic = locations.find(loc => loc.id === emp.locationId) || {}
              return <Employee key={emp.id} 
                               employee={emp} 
                               location= {clinic}/> })

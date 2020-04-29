@@ -11,7 +11,7 @@ return (
     <>
     <section className="employee">
         <h3 className="employee__name">{employee.name}</h3>
-        <div className="employee__location">{employee.address}</div>
+        <div className="employee__address">{employee.address}</div>
         <div className="employee__location">{location.name}</div>
         <Button onClick={() => {
                 // check if the user is authenticated
@@ -24,7 +24,7 @@ return (
                 Edit Employee
                 </ModalHeader>
                 <ModalBody>
-                    <EditEmployeeForm toggler={toggle} employee= {employee} location = {location} />
+                    <EditEmployeeForm toggle={toggle} employee= {employee} location = {location} />
                 </ModalBody>
             </Modal>
     </>

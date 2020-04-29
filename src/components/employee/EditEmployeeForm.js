@@ -3,7 +3,7 @@ import { EmployeeContext } from "./EmployeeProvider"
 import { LocationContext } from "../location/LocationProvider"
 import "./Employee.css"
 
-export const EditEmployeeForm = ({ employee, toggle }) => {
+export const EditEmployeeForm = ({ employee, toggle, location }) => {
     const { updateEmployee } = useContext(EmployeeContext)
     const { locations } = useContext(LocationContext)
 
@@ -39,13 +39,13 @@ export const EditEmployeeForm = ({ employee, toggle }) => {
 
     return (
         <form className="employeeForm">
-            <h2 className="employeeForm__title">New Employee</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="employeeName">Employee name: </label>
                     <input
                         type="text"
                         id="employeeName"
+                        name= "name"
                         defaultValue={employee.name}
                         onChange={handleControlledInputChange}
                         required
@@ -61,6 +61,7 @@ export const EditEmployeeForm = ({ employee, toggle }) => {
                     <input
                         type="text"
                         id="employeeAddress"
+                        name = "address"
                         defaultValue={employee.address}
                         onChange={handleControlledInputChange}
                         required
@@ -75,7 +76,7 @@ export const EditEmployeeForm = ({ employee, toggle }) => {
                     <label htmlFor="location">Assign to location: </label>
                     <select
                         defaultValue=""
-                        name="location"
+                        name="locationId"
                         defaultValue={employee.locationId}
                         onChange={handleControlledInputChange}
                         id="employeeLocation"
